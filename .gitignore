@@ -1,0 +1,80 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+public:
+  int data;
+  Node*next;
+
+Node(int data){
+  this->data=data;
+ this-> next=NULL;
+}
+
+
+};
+// inserting from front 
+void inserthead(Node* &head,int d){
+  Node*temp=new Node(d);
+  temp->next=head;
+  head=temp;
+}
+// inserting from back
+void inserttail(Node*&tail ,int d){
+Node*temp=new Node(d);
+  tail->next=temp;
+tail=temp;
+
+}
+// printing the inserted value
+void print(Node*&head){
+ 
+    Node*temp=head;
+  while(temp!=NULL)
+  {
+    cout<<temp->data<<" ";
+    temp=temp->next;
+  } cout<<endl;
+  }
+// inserting from anywhere
+void insertinmiddle(Node* &tail,Node* &head,int position,int d){
+
+if(position==1){
+   inserthead(head, d);
+  return;
+  }
+
+  
+  int count=1;
+Node*temp=head;  
+  while(count<position-1){
+    temp=temp->next;
+  count++;}
+if(temp->next==NULL){
+  inserttail(tail , d);
+return;}
+  Node*nodetoinsert=new Node(d);
+nodetoinsert->next=temp->next;
+  temp->next=nodetoinsert;
+}
+
+int main() {
+ Node*node1=new Node(7);
+  
+  Node*head=node1;
+
+
+
+Node*tail=node1;
+  print(tail);
+inserttail(tail,9);
+   print(head);
+inserttail(tail,5);
+print(head);
+
+
+  insertinmiddle(tail,head,4,69);
+  insertinmiddle(tail,head,5,69);
+  print(head);
+  return 0;
+  }
