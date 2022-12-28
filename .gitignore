@@ -11,8 +11,19 @@ Node(int data){
  this-> next=NULL;
 }
 
+~Node(){
+  int k=this->data;
+   if(this->next!=NULL){
+     delete next;
+     this->next=NULL;
+   }
+  cout<<"Memory is free for node with data "<<k<<endl;
+}
+
+
 
 };
+
 // inserting from front 
 void inserthead(Node* &head,int d){
   Node*temp=new Node(d);
@@ -28,7 +39,7 @@ tail=temp;
 }
 // printing the inserted value
 void print(Node*&head){
- 
+
     Node*temp=head;
   while(temp!=NULL)
   {
@@ -44,7 +55,7 @@ if(position==1){
   return;
   }
 
-  
+
   int count=1;
 Node*temp=head;  
   while(count<position-1){
@@ -57,10 +68,34 @@ return;}
 nodetoinsert->next=temp->next;
   temp->next=nodetoinsert;
 }
+// deletion in linked list
+void deletelink(int position,Node* &head){
 
+if(position==1){
+  Node*temp=head;
+  head=head->next;
+  temp->next=NULL;
+  delete temp;
+}
+  else{
+    Node*curr=head;
+    Node*prev=NULL;
+    int count=1;
+    while(count<position){
+      prev=curr;
+      curr=curr->next;
+      count++;
+    }
+     prev->next=curr->next;
+    curr->next=NULL;
+    delete curr;
+  }
+
+  
+}
 int main() {
  Node*node1=new Node(7);
-  
+
   Node*head=node1;
 
 
@@ -74,7 +109,9 @@ print(head);
 
 
   insertinmiddle(tail,head,4,69);
-  insertinmiddle(tail,head,5,69);
+  insertinmiddle(tail,head,5,99);
+  print(head);
+deletelink( 1,head);
   print(head);
   return 0;
   }
